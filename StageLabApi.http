@@ -1,6 +1,0 @@
-@StageLabApi_HostAddress = http://localhost:5215
-
-GET {{StageLabApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
