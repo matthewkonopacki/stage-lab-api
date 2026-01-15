@@ -17,3 +17,15 @@ obj/
 
 # macOS
 .DS_Store
+.nx/installation
+.nx/cache
+.nx/workspace-data
+# Node
+node_modules
+
+# Nx build output
+dist
+
+# Test coverage
+coverage-report
+TestResults
