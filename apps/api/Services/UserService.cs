@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using StageLabApi.Interfaces;
 using StageLabApi.Models;
+using StageLabApi.Models.Request;
+using StageLabApi.Models.Response;
 
 namespace StageLabApi.Services;
 
@@ -10,14 +12,20 @@ public class UserService(ApplicationDbContext context) : IUserService
     {
         return context.User.FirstOrDefaultAsync(u => u.Email == email);
     }
-    
-    public async Task<User> CreateUser(User userData)
-    {
-        userData.Password = BCrypt.Net.BCrypt.HashPassword(userData.Password);
 
-        context.User.Add(userData);
+    public async Task<CreateUserResponse> CreateUser(SignUpRequest userData)
+    {
+        User user = new User
+        {
+            Email = userData.Email,
+            FirstName = userData.FirstName,
+            LastName = userData.LastName,
+        };
+        user.Password = BCrypt.Net.BCrypt.HashPassword(userData.Password);
+
+        context.User.Add(user);
         await context.SaveChangesAsync();
-        
-        return userData;
+
+        return new CreateUserResponse(user.Email, user.Id);
     }
 }

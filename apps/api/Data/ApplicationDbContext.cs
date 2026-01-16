@@ -4,19 +4,15 @@ using StageLabApi.Models;
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    {
-    }
-    
+        : base(options) { }
+
     public DbSet<Event> Event { get; set; }
     public DbSet<EventUser> EventUser { get; set; }
     public DbSet<User> User { get; set; }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Event>()
-            .Property(e => e.Description)
-            .HasColumnType("varchar(255)");
+        modelBuilder.Entity<Event>().Property(e => e.Description).HasColumnType("varchar(255)");
 
         modelBuilder.Entity<User>(entity =>
         {

@@ -13,17 +13,20 @@ namespace StageLabApi.Migrations
             migrationBuilder.RenameColumn(
                 name: "startDateTime",
                 table: "Events",
-                newName: "StartDateTime");
+                newName: "StartDateTime"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "endDateTime",
                 table: "Events",
-                newName: "EndDateTime");
+                newName: "EndDateTime"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "description",
                 table: "Events",
-                newName: "Description");
+                newName: "Description"
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Description",
@@ -32,7 +35,8 @@ namespace StageLabApi.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "text",
-                oldNullable: true);
+                oldNullable: true
+            );
         }
 
         /// <inheritdoc />
@@ -41,17 +45,20 @@ namespace StageLabApi.Migrations
             migrationBuilder.RenameColumn(
                 name: "StartDateTime",
                 table: "Events",
-                newName: "startDateTime");
+                newName: "startDateTime"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "EndDateTime",
                 table: "Events",
-                newName: "endDateTime");
+                newName: "endDateTime"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "Description",
                 table: "Events",
-                newName: "description");
+                newName: "description"
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "description",
@@ -60,7 +67,8 @@ namespace StageLabApi.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "varchar(255)",
-                oldNullable: true);
+                oldNullable: true
+            );
         }
     }
 }
