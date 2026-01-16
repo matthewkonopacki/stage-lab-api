@@ -4,7 +4,7 @@
       {
          "name": "format",
          "command": "dotnet",
-         "args": ["csharpier", "format", "apps/api"],
+         "args": ["csharpier", "apps/api"],
          "include": ["apps/api/**/*.cs"]
       },
       {
