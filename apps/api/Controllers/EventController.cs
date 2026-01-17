@@ -14,17 +14,10 @@ public class EventController(ApplicationDbContext context, IEventService eventSe
     : ControllerBase
 {
     [Authorize]
-    [HttpGet()]
-    public IActionResult Get()
-    {
-        return Ok(new Event());
-    }
-
-    [Authorize]
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Event>> GetEventById(int id)
     {
-        var eventItem = await context.Event.FindAsync(id);
+        var eventItem = await eventService.GetEventById(id);
 
         if (eventItem == null)
             return NotFound();

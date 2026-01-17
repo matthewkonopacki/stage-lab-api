@@ -9,6 +9,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Event> Event { get; set; }
     public DbSet<EventUser> EventUser { get; set; }
     public DbSet<User> User { get; set; }
+    public DbSet<Location> Location { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
