@@ -9,9 +9,24 @@ namespace StageLabApi.Services;
 
 public class UserService(ApplicationDbContext context) : IUserService
 {
-    public Task<User?> GetUserByEmail(string email, string password)
+    public async Task<UserResponse?> GetUserByEmail(string email)
     {
-        return context.User.FirstOrDefaultAsync(u => u.Email == email);
+        var query = context.User.AsQueryable();
+
+        UserResponse? userResponse = await query
+            .Where(u => u.Email == email)
+            .Select(u => new UserResponse(
+                u.Id,
+                u.Email,
+                u.FirstName,
+                u.LastName,
+                u.Password,
+                u.Role!.Actions.Select(a => a.Name).ToList(),
+                u.Role
+            ))
+            .FirstOrDefaultAsync();
+
+        return userResponse;
     }
 
     public async Task<CreateUserResponse> CreateUser(SignUpRequest userData)
