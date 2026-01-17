@@ -22,6 +22,7 @@ public class UserService(ApplicationDbContext context) : IUserService
             FirstName = userData.FirstName,
             LastName = userData.LastName,
             Password = BCrypt.Net.BCrypt.HashPassword(userData.Password),
+            RoleId = userData.RoleId
         };
 
         context.User.Add(user);

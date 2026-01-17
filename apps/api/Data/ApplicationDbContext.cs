@@ -2,20 +2,31 @@ using Microsoft.EntityFrameworkCore;
 using StageLabApi.Models;
 
 namespace StageLabApi.Data;
+using Action = StageLabApi.Models.Action;
+
 
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) { }
 
+    public DbSet<Action> Action { get; set; }
+    public DbSet<ActionRole> ActionRole { get; set; }
     public DbSet<Event> Event { get; set; }
     public DbSet<EventUser> EventUser { get; set; }
     public DbSet<Location> Location { get; set; }
     public DbSet<Project> Project { get; set; }
+    public DbSet<Role> Role { get; set; }
     public DbSet<User> User { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Action>(entity =>
+        {
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Description).HasMaxLength(255);
+        });
+        
         modelBuilder.Entity<Event>().Property(e => e.Description).HasColumnType("varchar(255)");
 
         modelBuilder.Entity<Location>(entity =>
@@ -32,6 +43,12 @@ public class ApplicationDbContext : DbContext
         {
             entity.Property(e => e.Name).HasMaxLength(255);
             entity.Property(e => e.Description).HasMaxLength(100);
+        });
+        
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Description).HasMaxLength(255);
         });
 
         modelBuilder.Entity<User>(entity =>
