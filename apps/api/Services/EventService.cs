@@ -48,7 +48,7 @@ public class EventService(ApplicationDbContext context) : IEventService
                 e.Description,
                 e.StartDateTime,
                 e.EndDateTime,
-e.Location != null
+                e.Location != null
                     ? new EventLocationResponse(
                         e.Location.Id,
                         e.Location.Name,

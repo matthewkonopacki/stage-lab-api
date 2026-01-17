@@ -10,7 +10,8 @@ public class AuthService(IConfiguration configuration) : IAuthService
 {
     public string GenerateJwtToken(string email, string userId)
     {
-        var jwtKey = configuration["Jwt:Key"]
+        var jwtKey =
+            configuration["Jwt:Key"]
             ?? throw new InvalidOperationException("JWT Key is not configured");
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
