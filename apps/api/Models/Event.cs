@@ -7,7 +7,9 @@ public class Event
     public DateTime StartDateTime { get; set; }
     public DateTime EndDateTime { get; set; }
     public int LocationId { get; set; }
+    public int? ProjectId { get; set; }
 
     public ICollection<EventUser> EventUsers { get; set; } = [];
     public Location? Location { get; set; }
+    public Project? Project { get; set; }
 }

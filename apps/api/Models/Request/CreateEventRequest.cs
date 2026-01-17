@@ -5,5 +5,6 @@ public record CreateEventRequest(
     DateTime StartDateTime,
     DateTime EndDateTime,
     int LocationId,
+    int? ProjectId,
     List<int> UserIds
 );

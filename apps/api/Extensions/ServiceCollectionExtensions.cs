@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using StageLabApi.Data;
 using StageLabApi.Interfaces;
 using StageLabApi.Services;
 
@@ -9,9 +10,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IEventService, EventService>();
         services.AddScoped<ILocationService, LocationService>();
+        services.AddScoped<IProjectService, ProjectService>();
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }

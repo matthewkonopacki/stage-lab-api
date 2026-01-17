@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using StageLabApi.Data;
 using StageLabApi.Interfaces;
 using StageLabApi.Models;
 using StageLabApi.Models.QueryParams;
@@ -14,9 +15,10 @@ public class EventService(ApplicationDbContext context) : IEventService
         var eventResponse = new Event
         {
             Description = eventData.Description,
-            LocationId = eventData.LocationId,
-            StartDateTime = eventData.StartDateTime,
             EndDateTime = eventData.EndDateTime,
+            LocationId = eventData.LocationId,
+            ProjectId = eventData.ProjectId,
+            StartDateTime = eventData.StartDateTime,
             EventUsers = eventData
                 .UserIds.Select(userId => new EventUser { UserId = userId })
                 .ToList(),
