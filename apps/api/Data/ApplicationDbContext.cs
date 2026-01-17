@@ -2,8 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using StageLabApi.Models;
 
 namespace StageLabApi.Data;
-using Action = StageLabApi.Models.Action;
 
+using Action = StageLabApi.Models.Action;
 
 public class ApplicationDbContext : DbContext
 {
@@ -26,7 +26,7 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(100);
             entity.Property(e => e.Description).HasMaxLength(255);
         });
-        
+
         modelBuilder.Entity<Event>().Property(e => e.Description).HasColumnType("varchar(255)");
 
         modelBuilder.Entity<Location>(entity =>
@@ -44,7 +44,7 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(255);
             entity.Property(e => e.Description).HasMaxLength(100);
         });
-        
+
         modelBuilder.Entity<Role>(entity =>
         {
             entity.Property(e => e.Name).HasMaxLength(100);
