@@ -8,11 +8,7 @@ namespace StageLabApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AuthController(
-    IAuthService authService,
-    IUserService userService,
-    ILogger<AuthController> logger
-) : ControllerBase
+public class AuthController(IAuthService authService, IUserService userService) : ControllerBase
 {
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequest request)

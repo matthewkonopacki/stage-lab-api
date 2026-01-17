@@ -5,7 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using StageLabApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-var jwtKey = builder.Configuration["Jwt:Key"];
+var jwtKey = builder.Configuration["Jwt:Key"]
+    ?? throw new InvalidOperationException("JWT Key is not configured");
 
 // Add services to the container.
 builder.Services.AddInfrastructure(builder.Configuration);

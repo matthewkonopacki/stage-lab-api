@@ -5,5 +5,5 @@ public record EventResponse(
     string? Description,
     DateTime StartDateTime,
     DateTime EndDateTime,
-    EventLocationResponse Location
+    EventLocationResponse? Location
 );

@@ -8,6 +8,6 @@ public class Event
     public DateTime EndDateTime { get; set; }
     public int LocationId { get; set; }
 
-    public ICollection<EventUser> EventUsers { get; set; }
+    public ICollection<EventUser> EventUsers { get; set; } = [];
     public Location? Location { get; set; }
 }

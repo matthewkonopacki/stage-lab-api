@@ -20,8 +20,8 @@ public class UserService(ApplicationDbContext context) : IUserService
             Email = userData.Email,
             FirstName = userData.FirstName,
             LastName = userData.LastName,
+            Password = BCrypt.Net.BCrypt.HashPassword(userData.Password),
         };
-        user.Password = BCrypt.Net.BCrypt.HashPassword(userData.Password);
 
         context.User.Add(user);
         await context.SaveChangesAsync();

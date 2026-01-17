@@ -48,15 +48,17 @@ public class EventService(ApplicationDbContext context) : IEventService
                 e.Description,
                 e.StartDateTime,
                 e.EndDateTime,
-                new EventLocationResponse(
-                    e.Location.Id,
-                    e.Location.Name,
-                    e.Location.Address1,
-                    e.Location.Address2,
-                    e.Location.City,
-                    e.Location.State,
-                    e.Location.Zip
-                )
+e.Location != null
+                    ? new EventLocationResponse(
+                        e.Location.Id,
+                        e.Location.Name,
+                        e.Location.Address1,
+                        e.Location.Address2,
+                        e.Location.City,
+                        e.Location.State,
+                        e.Location.Zip
+                    )
+                    : null
             ))
             .ToListAsync();
 

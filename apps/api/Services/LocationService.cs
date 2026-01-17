@@ -12,7 +12,7 @@ public class LocationService(ApplicationDbContext context) : ILocationService
     public async Task<LocationResponse?> GetLocationById(int id)
     {
         var location = await context.Location.FindAsync(id);
-        
+
         if (location == null)
             return null;
 
@@ -31,19 +31,21 @@ public class LocationService(ApplicationDbContext context) : ILocationService
     {
         var query = context.Location.AsQueryable();
 
-        var locations = await query.Select(l => new LocationResponse(
-            l.Id,
-            l.Name,
-            l.Address1,
-            l.Address2,
-            l.City,
-            l.State,
-            l.Zip
-        )).ToListAsync();
-        
+        var locations = await query
+            .Select(l => new LocationResponse(
+                l.Id,
+                l.Name,
+                l.Address1,
+                l.Address2,
+                l.City,
+                l.State,
+                l.Zip
+            ))
+            .ToListAsync();
+
         return locations;
     }
-    
+
     public async Task<Location> CreateLocation(CreateLocationRequest locationData)
     {
         Location locationResponse = new Location
@@ -53,7 +55,7 @@ public class LocationService(ApplicationDbContext context) : ILocationService
             City = locationData.City,
             State = locationData.State,
             Zip = locationData.Zip,
-            Name = locationData.Name
+            Name = locationData.Name,
         };
 
         context.Location.Add(locationResponse);

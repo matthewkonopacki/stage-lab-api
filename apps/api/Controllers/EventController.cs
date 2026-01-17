@@ -10,8 +10,7 @@ namespace StageLabApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class EventController(ApplicationDbContext context, IEventService eventService)
-    : ControllerBase
+public class EventController(IEventService eventService) : ControllerBase
 {
     [Authorize]
     [HttpGet("{id:int}")]
