@@ -9,7 +9,9 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+        services.AddHttpContextAccessor();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<IEventService, EventService>();
         services.AddScoped<ILocationService, LocationService>();
         services.AddScoped<IProjectService, ProjectService>();

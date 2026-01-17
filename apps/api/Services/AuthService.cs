@@ -26,7 +26,6 @@ public class AuthService(IConfiguration configuration) : IAuthService
             new Claim("sub", userId),
             new Claim("email", email),
             new Claim("jti", Guid.NewGuid().ToString()),
-            new Claim("iat", DateTime.UtcNow.ToString("o")),
             new Claim("role", role),
         };
 

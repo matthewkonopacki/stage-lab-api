@@ -10,12 +10,18 @@ namespace StageLabApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class EventController(IEventService eventService) : ControllerBase
+public class EventController(
+    ILogger<EventController> logger,
+    IEventService eventService,
+    ICurrentUserService currentUserService
+) : ControllerBase
 {
     [Authorize]
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Event>> GetEventById(int id)
     {
+        var user = currentUserService.GetCurrentUser();
+        logger.LogInformation("Current User Actions: {Actions}", user?.Actions);
         var eventItem = await eventService.GetEventById(id);
 
         if (eventItem == null)
