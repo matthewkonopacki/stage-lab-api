@@ -8,7 +8,7 @@ using StageLabApi.Models.Response;
 
 namespace StageLabApi.Services;
 
-public class ProjectService(ApplicationDbContext context): IProjectService
+public class ProjectService(ApplicationDbContext context) : IProjectService
 {
     public async Task<ProjectResponse?> GetProjectById(int id)
     {
@@ -17,12 +17,7 @@ public class ProjectService(ApplicationDbContext context): IProjectService
         if (project == null)
             return null;
 
-        return new ProjectResponse(
-            project.Id,
-            project.Type,
-            project.Name,
-            project.Description
-        );
+        return new ProjectResponse(project.Id, project.Type, project.Name, project.Description);
     }
 
     public async Task<List<ProjectResponse>> QueryProjects(ProjectQueryParams queryParams)
@@ -35,12 +30,7 @@ public class ProjectService(ApplicationDbContext context): IProjectService
         }
 
         var projects = await query
-            .Select(p => new ProjectResponse(
-                p.Id,
-                p.Type,
-                p.Name,
-                p.Description
-            ))
+            .Select(p => new ProjectResponse(p.Id, p.Type, p.Name, p.Description))
             .ToListAsync();
 
         return projects;

@@ -4,5 +4,5 @@ public enum ProjectType
 {
     Production = 0,
     Concert = 1,
-    Fundraiser = 2
+    Fundraiser = 2,
 }

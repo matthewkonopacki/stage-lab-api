@@ -8,4 +8,4 @@ public record ProjectResponse(
     string Name,
     string Description,
     List<EventResponse>? Events = null
-    );
+);

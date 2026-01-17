@@ -18,7 +18,8 @@ namespace StageLabApi.Migrations
                 maxLength: 10,
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text"
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "State",
@@ -27,7 +28,8 @@ namespace StageLabApi.Migrations
                 maxLength: 2,
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text"
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
@@ -36,7 +38,8 @@ namespace StageLabApi.Migrations
                 maxLength: 255,
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text"
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "City",
@@ -45,7 +48,8 @@ namespace StageLabApi.Migrations
                 maxLength: 50,
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text"
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Address2",
@@ -54,7 +58,8 @@ namespace StageLabApi.Migrations
                 maxLength: 100,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text"
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Address1",
@@ -63,59 +68,69 @@ namespace StageLabApi.Migrations
                 maxLength: 100,
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text"
+            );
 
             migrationBuilder.AddColumn<int>(
                 name: "ProjectId",
                 table: "Event",
                 type: "integer",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.CreateTable(
                 name: "Project",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table
+                        .Column<int>(type: "integer", nullable: false)
+                        .Annotation(
+                            "Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                        ),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    Name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    Name = table.Column<string>(
+                        type: "character varying(255)",
+                        maxLength: 255,
+                        nullable: false
+                    ),
+                    Description = table.Column<string>(
+                        type: "character varying(100)",
+                        maxLength: 100,
+                        nullable: false
+                    ),
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Project", x => x.Id);
-                });
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Event_ProjectId",
                 table: "Event",
-                column: "ProjectId");
+                column: "ProjectId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Event_Project_ProjectId",
                 table: "Event",
                 column: "ProjectId",
                 principalTable: "Project",
-                principalColumn: "Id");
+                principalColumn: "Id"
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Event_Project_ProjectId",
-                table: "Event");
+            migrationBuilder.DropForeignKey(name: "FK_Event_Project_ProjectId", table: "Event");
 
-            migrationBuilder.DropTable(
-                name: "Project");
+            migrationBuilder.DropTable(name: "Project");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Event_ProjectId",
-                table: "Event");
+            migrationBuilder.DropIndex(name: "IX_Event_ProjectId", table: "Event");
 
-            migrationBuilder.DropColumn(
-                name: "ProjectId",
-                table: "Event");
+            migrationBuilder.DropColumn(name: "ProjectId", table: "Event");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Zip",
@@ -124,7 +139,8 @@ namespace StageLabApi.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "character varying(10)",
-                oldMaxLength: 10);
+                oldMaxLength: 10
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "State",
@@ -133,7 +149,8 @@ namespace StageLabApi.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "character varying(2)",
-                oldMaxLength: 2);
+                oldMaxLength: 2
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
@@ -142,7 +159,8 @@ namespace StageLabApi.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "character varying(255)",
-                oldMaxLength: 255);
+                oldMaxLength: 255
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "City",
@@ -151,7 +169,8 @@ namespace StageLabApi.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "character varying(50)",
-                oldMaxLength: 50);
+                oldMaxLength: 50
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Address2",
@@ -162,7 +181,8 @@ namespace StageLabApi.Migrations
                 oldClrType: typeof(string),
                 oldType: "character varying(100)",
                 oldMaxLength: 100,
-                oldNullable: true);
+                oldNullable: true
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Address1",
@@ -171,7 +191,8 @@ namespace StageLabApi.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "character varying(100)",
-                oldMaxLength: 100);
+                oldMaxLength: 100
+            );
         }
     }
 }

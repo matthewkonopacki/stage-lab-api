@@ -15,7 +15,7 @@ public class ProjectController(IProjectService projectService) : ControllerBase
     public async Task<ActionResult<Project>> GetProjectById(int id)
     {
         var project = await projectService.GetProjectById(id);
-        
+
         if (project == null)
             return NotFound();
 

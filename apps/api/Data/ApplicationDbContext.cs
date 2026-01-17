@@ -27,13 +27,13 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.State).HasMaxLength(2);
             entity.Property(e => e.Zip).HasMaxLength(10);
         });
-        
+
         modelBuilder.Entity<Project>(entity =>
         {
             entity.Property(e => e.Name).HasMaxLength(255);
             entity.Property(e => e.Description).HasMaxLength(100);
         });
-        
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.Property(e => e.FirstName).HasMaxLength(50);
