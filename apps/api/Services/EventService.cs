@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using StageLabApi.Data;
 using StageLabApi.Interfaces;
 using StageLabApi.Models;
 using StageLabApi.Models.QueryParams;
