@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddHttpContextAccessor();
+
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<IEventService, EventService>();
@@ -28,6 +29,12 @@ public static class ServiceCollectionExtensions
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(config["DefaultConnection"])
         );
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = config["Redis:ConnectionString"];
+            options.InstanceName = "StageLabApi";
+        });
 
         return services;
     }

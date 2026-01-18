@@ -49,4 +49,16 @@ public class EventController(
 
         return CreatedAtAction(nameof(GetEventById), new { id = eventRecord.Id }, eventData);
     }
+
+    [Authorize]
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<bool>> Delete(int id)
+    {
+        var successfullyDeleted = await eventService.DeleteEvent(id);
+
+        if (!successfullyDeleted)
+            return BadRequest();
+
+        return Ok();
+    }
 }

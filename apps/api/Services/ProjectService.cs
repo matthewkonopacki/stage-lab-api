@@ -51,4 +51,14 @@ public class ProjectService(ApplicationDbContext context) : IProjectService
 
         return projectResponse;
     }
+
+    public async Task<bool> DeleteProject(int id)
+    {
+        var successfullyDeleted = await context.Project.Where(e => e.Id == id).ExecuteDeleteAsync();
+
+        if (successfullyDeleted == 0)
+            return false;
+
+        return true;
+    }
 }

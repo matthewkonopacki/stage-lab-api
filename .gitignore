@@ -35,3 +35,5 @@ TestResults
 out
 
 .env.local
+
+tmp/

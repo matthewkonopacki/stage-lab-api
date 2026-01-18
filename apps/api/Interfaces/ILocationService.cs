@@ -10,4 +10,5 @@ public interface ILocationService
     public Task<LocationResponse?> GetLocationById(int id);
     public Task<List<LocationResponse>> QueryLocations(LocationQueryParams queryParams);
     public Task<Location> CreateLocation(CreateLocationRequest locationData);
+    public Task<bool> DeleteLocation(int id);
 }

@@ -37,4 +37,15 @@ public class LocationController(ILocationService locationService) : ControllerBa
 
         return Ok(location);
     }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<bool>> DeleteLocation(int id)
+    {
+        var successfullyDeleted = await locationService.DeleteLocation(id);
+
+        if (!successfullyDeleted)
+            return BadRequest();
+
+        return Ok();
+    }
 }

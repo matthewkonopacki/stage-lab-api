@@ -65,4 +65,16 @@ public class LocationService(ApplicationDbContext context) : ILocationService
 
         return locationResponse;
     }
+
+    public async Task<bool> DeleteLocation(int id)
+    {
+        var successfullyDeleted = await context
+            .Location.Where(e => e.Id == id)
+            .ExecuteDeleteAsync();
+
+        if (successfullyDeleted == 0)
+            return false;
+
+        return true;
+    }
 }

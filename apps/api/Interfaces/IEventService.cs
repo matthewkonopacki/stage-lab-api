@@ -11,4 +11,5 @@ public interface IEventService
     public Task<Event> CreateEvent(CreateEventRequest eventDto);
     public Task<List<EventResponse>> QueryEvents([FromQuery] EventQueryParams queryParams);
     public Task<Event?> GetEventById(int id);
+    public Task<bool> DeleteEvent(int id);
 }

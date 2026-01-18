@@ -66,4 +66,14 @@ public class EventService(ApplicationDbContext context) : IEventService
 
         return events;
     }
+
+    public async Task<bool> DeleteEvent(int id)
+    {
+        var deletedEvent = await context.Event.Where(e => e.Id == id).ExecuteDeleteAsync();
+
+        if (deletedEvent == 0)
+            return false;
+
+        return true;
+    }
 }

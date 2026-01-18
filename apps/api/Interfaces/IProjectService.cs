@@ -10,4 +10,5 @@ public interface IProjectService
     public Task<ProjectResponse?> GetProjectById(int id);
     public Task<List<ProjectResponse>> QueryProjects(ProjectQueryParams queryParams);
     public Task<Project> CreateProject(CreateProjectRequest projectData);
+    public Task<bool> DeleteProject(int id);
 }
