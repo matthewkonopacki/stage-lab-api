@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ILocationService, LocationService>();
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<IRoleActionsCacheService, RoleActionsCacheService>();
+        services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IUserService, UserService>();
 
         return services;
