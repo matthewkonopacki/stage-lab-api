@@ -8,12 +8,7 @@ namespace StageLabApi.Services;
 
 public class AuthService(IConfiguration configuration) : IAuthService
 {
-    public string GenerateJwtToken(
-        string email,
-        string userId,
-        string role,
-        List<string> actionNames
-    )
+    public string GenerateJwtToken(string email, string userId, string role, int roleId)
     {
         var jwtKey =
             configuration["Jwt:Key"]
@@ -27,12 +22,8 @@ public class AuthService(IConfiguration configuration) : IAuthService
             new Claim("email", email),
             new Claim("jti", Guid.NewGuid().ToString()),
             new Claim("role", role),
+            new Claim("roleId", roleId.ToString()),
         };
-
-        foreach (string action in actionNames)
-        {
-            claims.Add(new Claim("action", action));
-        }
 
         var token = new JwtSecurityToken(
             configuration["Jwt:Issuer"],

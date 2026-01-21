@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StageLabApi.Interfaces;
@@ -20,7 +21,9 @@ public class EventController(
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Event>> GetEventById(int id)
     {
-        var user = currentUserService.GetCurrentUser();
+        var user = await currentUserService.GetCurrentUserAsync();
+
+        logger.LogInformation(JsonSerializer.Serialize(user));
         logger.LogInformation("Current User Actions: {Actions}", user?.Actions);
         var eventItem = await eventService.GetEventById(id);
 

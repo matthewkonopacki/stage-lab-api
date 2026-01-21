@@ -7,5 +7,5 @@ namespace StageLabApi.Interfaces;
 public interface IUserService
 {
     public Task<UserResponse?> GetUserByEmail(string email);
-    public Task<CreateUserResponse> CreateUser(SignUpRequest request);
+    public Task<UserResponse?> CreateUser(SignUpRequest request);
 }

@@ -29,7 +29,7 @@ public class UserService(ApplicationDbContext context) : IUserService
         return userResponse;
     }
 
-    public async Task<CreateUserResponse> CreateUser(SignUpRequest userData)
+    public async Task<UserResponse?> CreateUser(SignUpRequest userData)
     {
         User user = new User
         {
@@ -43,6 +43,6 @@ public class UserService(ApplicationDbContext context) : IUserService
         context.User.Add(user);
         await context.SaveChangesAsync();
 
-        return new CreateUserResponse(user.Email, user.Id);
+        return await GetUserByEmail(user.Email);
     }
 }
