@@ -1,8 +1,13 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Hangfire;
+using Hangfire.PostgreSql;
+using Hangfire.Server;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore.Jobs;
 using Microsoft.IdentityModel.Tokens;
 using StageLabApi.Extensions;
+using StageLabApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 var jwtKey =
@@ -12,6 +17,21 @@ var jwtKey =
 // Add services to the container.
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplicationServices();
+
+Bogus.Premium.License.LicenseTo = "StageLab";
+Bogus.Premium.License.LicenseKey = builder.Configuration["Bogus:LicenseKey"];
+
+builder.Services.AddHangfire(config =>
+    config
+        .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+        .UseSimpleAssemblyNameTypeSerializer()
+        .UseRecommendedSerializerSettings()
+        .UsePostgreSqlStorage(options =>
+            options.UseNpgsqlConnection(builder.Configuration["DefaultConnection"])
+        )
+);
+
+builder.Services.AddHangfireServer();
 
 builder
     .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -48,6 +68,13 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseHangfireDashboard(
+    "/hangfire",
+    new DashboardOptions { Authorization = new[] { new AllowAllDashboardAuthorizationFilter() } }
+);
+
+RecurringJobs.Register(app.Services);
 
 app.MapControllers();
 

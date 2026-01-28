@@ -7,5 +7,5 @@ public record SignUpRequest(
     [Required, MinLength(8), MaxLength(255)] string Password,
     [Required, MaxLength(50)] string FirstName,
     [Required, MaxLength(50)] string LastName,
-    [Required, MaxLength(100)] int RoleId
+    [Required] int RoleId
 );

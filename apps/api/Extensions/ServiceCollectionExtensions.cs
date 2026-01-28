@@ -19,6 +19,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IRoleActionsCacheService, RoleActionsCacheService>();
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IFakeDataService, FakeDataService>();
 
         return services;
     }

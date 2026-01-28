@@ -6,14 +6,26 @@ using StageLabApi.Interfaces;
 
 namespace StageLabApi.Services;
 
-public class RoleActionsCacheService(IDistributedCache cache, ApplicationDbContext context)
-    : IRoleActionsCacheService
+public class RoleActionsCacheService(
+    ILogger<RoleActionsCacheService> logger,
+    IDistributedCache cache,
+    ApplicationDbContext context
+) : IRoleActionsCacheService
 {
     public async Task<List<string>> GetActionsForRoleAsync(int roleId)
     {
         var cacheKey = $"role:{roleId}:actions";
 
-        var cachedActions = await cache.GetStringAsync(cacheKey);
+        string? cachedActions = null;
+
+        try
+        {
+            cachedActions = await cache.GetStringAsync(cacheKey);
+        }
+        catch (Exception err)
+        {
+            logger.LogInformation("Redis cache unavailable. Falling back to db query.");
+        }
 
         if (cachedActions != null)
         {
@@ -26,14 +38,21 @@ public class RoleActionsCacheService(IDistributedCache cache, ApplicationDbConte
             .Select(a => a.Name)
             .ToListAsync();
 
-        await cache.SetStringAsync(
-            cacheKey,
-            JsonSerializer.Serialize(actions),
-            new DistributedCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30),
-            }
-        );
+        try
+        {
+            await cache.SetStringAsync(
+                cacheKey,
+                JsonSerializer.Serialize(actions),
+                new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30),
+                }
+            );
+        }
+        catch (Exception err)
+        {
+            logger.LogInformation("Redis cache unavailable. Skipping cache set.");
+        }
 
         return actions;
     }
