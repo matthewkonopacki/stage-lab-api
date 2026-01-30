@@ -24,3 +24,7 @@ async function fetchApi<T>(
 export async function getUserEvents(token: string, userId: string) {
   return fetchApi<Array<{description: string; id: number; }>>(`/event/query?UserId=${parseInt(userId)}`, token);
 }
+
+export async function getProductions(token: string) {
+  return fetchApi<Array<{description: string; id: number; }>>(`/project/query?PageNumber=1&PageSize=5`, token);
+}

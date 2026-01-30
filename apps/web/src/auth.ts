@@ -34,6 +34,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           id: decoded.sub,
           email: decoded.email,
           token: data.token,
+          firstName: decoded.firstName,
+          lastName: decoded.lastName,
+          role: decoded.role,
         };
       },
     }),
@@ -43,11 +46,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user) {
         token.id = user.id;
         token.accessToken = user.token;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       session.user.id = token.id as string;
+      session.user.firstName = token.firstName;
+      session.user.lastName = token.lastName;
+      session.user.role = token.role;
       session.accessToken = token.accessToken as string;
       return session;
     },

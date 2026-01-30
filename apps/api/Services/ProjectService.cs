@@ -29,6 +29,12 @@ public class ProjectService(ApplicationDbContext context) : IProjectService
             query = query.Where(p => p.Name.Contains(queryParams.Search));
         }
 
+        if (queryParams is { PageNumber: int pageNumber, PageSize: int pageSize })
+        {
+            int skipAmount = (pageNumber - 1) * pageSize;
+            query = query.Skip(skipAmount).Take(pageSize);
+        }
+
         var projects = await query
             .Select(p => new ProjectResponse(p.Id, p.Type, p.Name, p.Description))
             .ToListAsync();

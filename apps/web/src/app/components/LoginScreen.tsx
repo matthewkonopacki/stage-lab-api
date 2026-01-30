@@ -4,7 +4,7 @@ export default async function LoginScreen() {
   return (
     <div className="min-h-screen flex">
       <div className="min-h-screen flex-1 bg-[linear-gradient(135deg,#0f172a_0%,#112a4d_100%)]">
-        <div className="h-full p-15 flex flex-col justify-between">
+        <div className="h-full p-12 flex flex-col justify-between">
           <h1 className="text-5xl text-slate-50 font-black tracking-tight flex-1">
             StageLab
           </h1>

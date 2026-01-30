@@ -25,7 +25,9 @@ public class AuthController(IAuthService authService, IUserService userService) 
                 request.Email,
                 user.Id.ToString(),
                 user.Role.Name,
-                user.Role.Id
+                user.Role.Id,
+                user.FirstName,
+                user.LastName
             );
 
             return Ok(new LoginResponse(token));
@@ -45,8 +47,10 @@ public class AuthController(IAuthService authService, IUserService userService) 
         var token = authService.GenerateJwtToken(
             request.Email,
             createdUser.Id.ToString(),
-            createdUser?.Role?.Name ?? "Admin",
-            createdUser?.Role?.Id ?? 1
+            createdUser.Role?.Name ?? "Admin",
+            createdUser.Role?.Id ?? 1,
+            createdUser.FirstName,
+            createdUser.LastName
         );
 
         return Ok(new SignUpResponse(token));
