@@ -14,6 +14,19 @@ var jwtKey =
     builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException("JWT Key is not configured");
 
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowFrontend",
+        policy =>
+        {
+            var origins = builder.Configuration["Cors:AllowedOrigins"]?.Split(',') ?? [];
+            policy.WithOrigins(origins).AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+        }
+    );
+});
+
 // Add services to the container.
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplicationServices();
@@ -65,6 +78,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
