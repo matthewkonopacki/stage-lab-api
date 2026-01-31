@@ -13,6 +13,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Remove nx-dotnet plugin (not needed for frontend, requires dotnet CLI)
+RUN sed -i '/"@nx-dotnet\/core",/d' nx.json
+
 # Build the web app using Nx
 RUN npx nx build web --configuration=production
 
