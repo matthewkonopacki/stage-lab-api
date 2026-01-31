@@ -6,12 +6,11 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copy csproj and restore dependencies
-COPY ["apps/api/StageLabApi.csproj", "apps/api/"]
-RUN dotnet restore "apps/api/StageLabApi.csproj"
+COPY StageLabApi.csproj ./
+RUN dotnet restore "StageLabApi.csproj"
 
 # Copy everything else and build
 COPY . .
-WORKDIR "/src/apps/api"
 RUN dotnet build "StageLabApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
