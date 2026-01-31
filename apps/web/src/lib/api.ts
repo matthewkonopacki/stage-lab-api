@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5215';
+const API_BASE_URL = process.env.API_URL || 'http://localhost:5215';
 
 async function fetchApi<T>(
   endpoint: string,

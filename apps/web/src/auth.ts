@@ -15,7 +15,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const res = await fetch('http://localhost:5215/Auth/login', {
+        const res = await fetch(`${process.env.API_URL || 'http://localhost:5215/Auth/login'}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
