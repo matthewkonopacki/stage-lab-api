@@ -1,14 +1,18 @@
 # Dependencies
 node_modules
+.nx
 .pnp
 .pnp.js
 
 # Build outputs
 dist
 .next
+**/.next
 out
 bin
 obj
+**/bin
+**/obj
 
 # Testing
 coverage
