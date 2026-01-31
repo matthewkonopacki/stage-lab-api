@@ -24,7 +24,11 @@ public class RoleActionsCacheService(
         }
         catch (Exception err)
         {
-            logger.LogInformation("Redis cache unavailable. Falling back to db query.");
+            logger.LogError(
+                err,
+                "Redis cache unavailable. Falling back to db query. Error: {Message}",
+                err.Message
+            );
         }
 
         if (cachedActions != null)
@@ -51,7 +55,11 @@ public class RoleActionsCacheService(
         }
         catch (Exception err)
         {
-            logger.LogInformation("Redis cache unavailable. Skipping cache set.");
+            logger.LogError(
+                err,
+                "Redis cache unavailable. Skipping cache set. Error: {Message}",
+                err.Message
+            );
         }
 
         return actions;

@@ -10,7 +10,7 @@ public class RecurringJobs
         RecurringJob.AddOrUpdate<IFakeDataService>(
             recurringJobId: "daily-fake-data-generation",
             methodCall: service => service.GenerateFakeDataAsync(),
-            cronExpression: Cron.Daily(0, 0),
+            cronExpression: Cron.Never,
             options: new RecurringJobOptions { TimeZone = TimeZoneInfo.Utc }
         );
     }
