@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy package files from root (monorepo)
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 FROM base AS builder
 WORKDIR /app
