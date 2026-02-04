@@ -2,23 +2,12 @@
   "name": "stagelabapi",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["apps/web"],
   "scripts": {
-    "prepare": "nx g @nx-dotnet/core:restore"
+    "build:web": "cd apps/web && npm run build",
+    "dev:web": "cd apps/web && npm run dev",
+    "lint:web": "cd apps/web && npm run lint"
   },
   "devDependencies": {
-    "@nx-dotnet/core": "^3.0.2",
-    "@nx/eslint": "22.3.3",
-    "@nx/eslint-plugin": "22.3.3",
-    "@nx/js": "22.3.3",
-    "@nx/next": "^22.3.3",
-    "@swc-node/register": "~1.9.1",
-    "@swc/cli": "~0.6.0",
-    "@swc/core": "~1.5.7",
-    "@swc/helpers": "~0.5.11",
-    "nx": "^22.3.3",
-    "prettier": "~3.6.2",
-    "tslib": "^2.3.0",
-    "typescript": "~5.9.2"
+    "prettier": "~3.6.2"
   }
 }

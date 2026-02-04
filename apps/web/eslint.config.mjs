@@ -1,12 +1,27 @@
 import nextEslintPluginNext from '@next/eslint-plugin-next';
-import nx from '@nx/eslint-plugin';
-import baseConfig from '../../eslint.config.mjs';
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
 export default [
-  { plugins: { '@next/next': nextEslintPluginNext } },
-  ...baseConfig,
-  ...nx.configs['flat/react-typescript'],
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    ignores: ['.next/**/*'],
+    plugins: {
+      '@next/next': nextEslintPluginNext,
+      'react': reactPlugin,
+      'react-hooks': reactHooksPlugin,
+    },
+  },
+  {
+    ignores: ['.next/**/*', 'node_modules/**/*'],
+  },
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      ...nextEslintPluginNext.configs.recommended.rules,
+      ...nextEslintPluginNext.configs['core-web-vitals'].rules,
+    },
   },
 ];
