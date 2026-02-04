@@ -77,7 +77,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+// Only use HTTPS redirection in development (Railway handles SSL at edge)
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseCors("AllowFrontend");
 
@@ -92,5 +96,8 @@ app.UseHangfireDashboard(
 RecurringJobs.Register(app.Services);
 
 app.MapControllers();
+
+// Health check endpoint for Railway
+app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
 
 app.Run();
