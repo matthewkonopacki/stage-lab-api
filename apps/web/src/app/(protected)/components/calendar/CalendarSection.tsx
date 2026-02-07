@@ -1,6 +1,6 @@
 'use client';
 
-import Calendar, { CalendarEvent } from '../../../components/Calendar';
+import Calendar from '../../../components/Calendar';
 
 export default function CalendarSection() {
   return (
