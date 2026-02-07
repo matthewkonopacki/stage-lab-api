@@ -53,11 +53,11 @@ export default async function ProtectedLayout({
                 StageLab
               </h1>
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-">
               {buttons.map((button) => (
                 <div
                   key={button.id}
-                  className="flex items-center gap-2 px-3 py-2.5 text-slate-700 font-900 hover:bg-primary/5 hover:text-primary rounded-lg transition-all group"
+                  className="flex items-center gap-5 px-1 py-1 text-slate-700 font-900 hover:bg-primary/5 hover:text-primary rounded-lg transition-all group"
                 >
                   <button.icon className="!h-5 !w-5"></button.icon>
                   <h1 className="text-lg tracking-tight">{button.name}</h1>
@@ -106,12 +106,8 @@ export default async function ProtectedLayout({
             </button>
           </div>
         </header>
-        <div className="flex-1 min-h-0 overflow-y-auto m-5">
-          {events != null &&
-            events.length > 0 &&
-            events.map((event) => (
-              <div key={event.id.toString()}>{event.description}</div>
-            ))}
+        <div className="flex-1 min-h-0 overflow-y-auto">
+          {children}
         </div>
       </div>
     </div>

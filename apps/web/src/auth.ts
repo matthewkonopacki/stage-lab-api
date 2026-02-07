@@ -11,18 +11,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       credentials: {
+        firstName: { label: 'First Name', type: 'string' },
+        lastName: { label: 'Last Name', type: 'string' },
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const res = await fetch(`${process.env.API_URL || 'http://localhost:5215'}/Auth/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: credentials?.email,
-            password: credentials?.password,
-          }),
-        });
+        let res: Response | undefined;
+
+        if (credentials.firstName && credentials.lastName) {
+          res = await fetch(`${process.env.API_URL || 'http://localhost:5215'}/Auth/sign-up`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              firstName: credentials?.firstName,
+              lastName: credentials?.lastName,
+              email: credentials?.email,
+              password: credentials?.password,
+              roleId: 1
+            }),
+          });
+        } else {
+          res = await fetch(`${process.env.API_URL || 'http://localhost:5215'}/Auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: credentials?.email,
+              password: credentials?.password,
+            }),
+          });
+        }
 
         if (!res.ok) return null;
 

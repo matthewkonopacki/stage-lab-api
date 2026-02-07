@@ -1,6 +1,9 @@
 import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
-export default async function LoginScreen() {
+export default async function LoginScreen({ error }: { error?: string }) {
   return (
     <div className="min-h-screen flex">
       <div className="min-h-screen flex-1 bg-[linear-gradient(135deg,#0f172a_0%,#112a4d_100%)]">
@@ -36,12 +39,24 @@ export default async function LoginScreen() {
                 Welcome back! Please enter your details.
               </p>
             </div>
+            {error && (
+              <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
+                Invalid email or password. Please try again.
+              </div>
+            )}
             <form
               action={async (formData) => {
                 'use server';
-                await signIn('credentials', { ...Object.fromEntries(formData), redirectTo: '/' });
+                try {
+                  await signIn('credentials', { ...Object.fromEntries(formData), redirectTo: '/' });
+                } catch (err) {
+                  if (err instanceof AuthError) {
+                    redirect('/login?error=invalid');
+                  }
+                  throw err;
+                }
               }}
-              className="space-y-5"
+              className="space-y-5 mb-5"
             >
               <div className="flex flex-col">
                 <label className="block text-sm font-semibold text-slate-900 mb-2">
@@ -69,11 +84,17 @@ export default async function LoginScreen() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-primary hover:bg-blue-700 text-white font-bold h-12 rounded-xl transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
+                className="primary-btn"
               >
                 Sign In
               </button>
             </form>
+            <Link
+              className="secondary-btn"
+              href="/sign-up"
+            >
+                Create New Account
+            </Link>
           </div>
         </div>
       </div>

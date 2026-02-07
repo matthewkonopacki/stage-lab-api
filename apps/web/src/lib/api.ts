@@ -28,3 +28,7 @@ export async function getUserEvents(token: string, userId: string) {
 export async function getProductions(token: string) {
   return fetchApi<Array<{description: string; id: number; }>>(`/project/query?PageNumber=1&PageSize=5`, token);
 }
+
+export async function getRoles(token: string) {
+  return fetchApi<Array<{description: string; id: number; }>>(`/project/query?PageNumber=1&PageSize=5`, token);
+}
