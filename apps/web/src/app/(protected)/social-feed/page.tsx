@@ -1,7 +1,6 @@
 import { auth } from '@/auth';
-import CalendarSection from './components/calendar/CalendarSection';
 
-export default async function Home() {
+export default async function SocialFeedPage() {
   const session = await auth();
 
   return (
@@ -14,8 +13,6 @@ export default async function Home() {
           Here&apos;s your schedule overview
         </p>
       </div>
-
-      <CalendarSection />
     </main>
   );
 }

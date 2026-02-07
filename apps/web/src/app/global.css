@@ -9,7 +9,7 @@
 }
 
 @utility btn {
-  @apply font-bold h-12 rounded-xl transition-all flex items-center justify-center gap-2
+  @apply font-bold h-12 rounded-xl transition-all flex items-center justify-center gap-2;
 }
 
 @layer components {
@@ -20,9 +20,9 @@
   .top-bar {
     @apply h-16 border-b border-slate-200;
   }
-  
+
   .primary-btn {
-    @apply w-full btn bg-primary hover:bg-blue-700 text-white ;
+    @apply w-full btn bg-primary hover:bg-blue-700 text-white;
   }
 
   .secondary-btn {

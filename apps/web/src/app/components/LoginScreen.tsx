@@ -48,7 +48,10 @@ export default async function LoginScreen({ error }: { error?: string }) {
               action={async (formData) => {
                 'use server';
                 try {
-                  await signIn('credentials', { ...Object.fromEntries(formData), redirectTo: '/' });
+                  await signIn('credentials', {
+                    ...Object.fromEntries(formData),
+                    redirectTo: '/',
+                  });
                 } catch (err) {
                   if (err instanceof AuthError) {
                     redirect('/login?error=invalid');
@@ -82,18 +85,12 @@ export default async function LoginScreen({ error }: { error?: string }) {
                   required
                 />
               </div>
-              <button
-                type="submit"
-                className="primary-btn"
-              >
+              <button type="submit" className="primary-btn">
                 Sign In
               </button>
             </form>
-            <Link
-              className="secondary-btn"
-              href="/sign-up"
-            >
-                Create New Account
+            <Link className="secondary-btn" href="/sign-up">
+              Create New Account
             </Link>
           </div>
         </div>

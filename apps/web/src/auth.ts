@@ -20,26 +20,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         let res: Response | undefined;
 
         if (credentials.firstName && credentials.lastName) {
-          res = await fetch(`${process.env.API_URL || 'http://localhost:5215'}/Auth/sign-up`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              firstName: credentials?.firstName,
-              lastName: credentials?.lastName,
-              email: credentials?.email,
-              password: credentials?.password,
-              roleId: 1
-            }),
-          });
+          res = await fetch(
+            `${process.env.API_URL || 'http://localhost:5215'}/Auth/sign-up`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                firstName: credentials?.firstName,
+                lastName: credentials?.lastName,
+                email: credentials?.email,
+                password: credentials?.password,
+                roleId: 1,
+              }),
+            },
+          );
         } else {
-          res = await fetch(`${process.env.API_URL || 'http://localhost:5215'}/Auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: credentials?.email,
-              password: credentials?.password,
-            }),
-          });
+          res = await fetch(
+            `${process.env.API_URL || 'http://localhost:5215'}/Auth/login`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: credentials?.email,
+                password: credentials?.password,
+              }),
+            },
+          );
         }
 
         if (!res.ok) return null;

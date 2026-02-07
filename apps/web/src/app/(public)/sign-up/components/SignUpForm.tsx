@@ -3,7 +3,6 @@ import { AuthError } from 'next-auth';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-
 export default function SignUpForm() {
   return (
     <div className="w-full max-w-md">
@@ -19,7 +18,10 @@ export default function SignUpForm() {
         action={async (formData) => {
           'use server';
           try {
-            await signIn('credentials', { ...Object.fromEntries(formData), redirectTo: '/' });
+            await signIn('credentials', {
+              ...Object.fromEntries(formData),
+              redirectTo: '/',
+            });
           } catch (err) {
             if (err instanceof AuthError) {
               redirect('/login?error=invalid');
@@ -75,17 +77,19 @@ export default function SignUpForm() {
             required
           />
         </div>
-        <button
-          type="submit"
-          className="primary-btn"
-        >
+        <button type="submit" className="primary-btn">
           Create Account
         </button>
       </form>
       <div className="w-full flex gap-2 justify-center">
-        <div className="font-semibold text-slate-600"> Already have an account?</div>
-        <Link className="text-primary font-semibold" href={'/login'}>Log in</Link>
+        <p className="font-semibold text-slate-600">
+          {' '}
+          Already have an account?
+        </p>
+        <Link className="text-primary font-semibold" href={'/login'}>
+          Log in
+        </Link>
       </div>
     </div>
-  )
+  );
 }
