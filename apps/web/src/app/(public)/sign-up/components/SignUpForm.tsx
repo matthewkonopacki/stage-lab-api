@@ -1,6 +1,8 @@
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
+
 
 export default function SignUpForm() {
   return (
@@ -62,7 +64,7 @@ export default function SignUpForm() {
           />
         </div>
         <div className="flex flex-col">
-          <label className="block text-sm font-semibold text-slate-900">
+          <label className="block text-sm font-semibold text-slate-900 mb-2">
             Password
           </label>
           <input
@@ -80,6 +82,10 @@ export default function SignUpForm() {
           Create Account
         </button>
       </form>
+      <div className="w-full flex gap-2 justify-center">
+        <div className="font-semibold text-slate-600"> Already have an account?</div>
+        <Link className="text-primary font-semibold" href={'/login'}>Log in</Link>
+      </div>
     </div>
   )
 }
